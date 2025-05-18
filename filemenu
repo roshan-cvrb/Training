@@ -1,0 +1,53 @@
+def writefile(filename, content):
+    with open(filename, 'w') as file:
+        file.write(content)
+    return "File written successfully"
+
+def readfile(filename):
+    try:
+        with open(filename, 'r') as file:
+            content = file.read()
+        return content
+    except FileNotFoundError:
+        raise FileNotFoundError("File not found.")
+    
+def appendfile(filename, content):
+    with open(filename, 'a') as file:
+        file.write(content)
+    return "File appended successfully"
+
+def menu():
+    print("File Menu")
+    print("1. Write")
+    print("2. Read")
+    print("3. Append")
+    print("4. Exit")
+    
+    while True:
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            filename = input("Enter the filename: ")
+            content = input("Enter the content to write: ")
+            result = writefile(filename, content)
+            print(result)
+        elif choice == '2':
+            filename = input("Enter the filename: ")
+            try:
+                content = readfile(filename)
+                print(content)
+            except FileNotFoundError:
+                print("File not found.")
+        elif choice == '3':
+            filename = input("Enter the filename: ")
+            content = input("Enter the content to append: ")
+            result = appendfile(filename, content)
+            print(result)
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    menu()
+    
